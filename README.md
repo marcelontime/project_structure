@@ -1,88 +1,65 @@
-# Maestro - A Framework for Claude Opus to Orchestrate Subagents
-![hero](https://media.discordapp.net/attachments/1047006708813271100/1219776508864893088/DALLE_Mar_19_Landscape_Robot_Maestro_1.webp?ex=660c8866&is=65fa1366&hm=c49736c7547a81e3fa5ae63ed099a62496b2bbc6489cc2381e8833f815d3aa97&=&format=webp&width=3220&height=1840)
 
-This Python script demonstrates an AI-assisted task breakdown and execution workflow using the Anthropic API. It utilizes two AI models, Opus and Haiku, to break down an objective into sub-tasks, execute each sub-task, and refine the results into a cohesive final output.
+# Project Documentation Tool
+
+This tool generates a comprehensive documentation of your project structure and detailed contents of specified file types (`.py`, `.js`, `.css`, `.html`). It's designed to help you create a clear overview of your project for GitHub or other platforms where your code will be published.
 
 ## Features
 
-- Breaks down an objective into manageable sub-tasks using the Opus model
-- Executes each sub-task using the Haiku model
-- Provides the Haiku model with memory of previous sub-tasks for context
-- Refines the sub-task results into a final output using the Opus model
-- Generates a detailed exchange log capturing the entire task breakdown and execution process
-- Saves the exchange log to a Markdown file for easy reference
-- Utilizes an improved prompt for the Opus model to better assess task completion
-- Introduces a specific phrase, "The task is complete:", to indicate when the objective is fully achieved
-
-## Prerequisites
-
-To run this script, you need to have the following:
-
-- Python installed
-- Anthropic API key
-- Required Python packages: `anthropic` and `rich`
-
-## Installation
-
-1. Clone the repository or download the script file.
-2. Install the required Python packages by running the following command:
-
-```bash
-pip install anthropic rich
-```
-
-3. Replace the placeholder API key in the script with your actual Anthropic API key:
-
-```python
-client = Anthropic(api_key="YOUR_API_KEY_HERE")
-```
+- **Project Structure Overview**: Generates a tree representation of your project directory, excluding directories and files starting with a dot (e.g., `.git`) and the `venv` directory.
+- **File Contents Inclusion**: Appends the contents of `.py`, `.js`, `.css`, and `.html` files to the documentation, providing a detailed look into your project's codebase.
 
 ## Usage
 
-1. Open a terminal or command prompt and navigate to the directory containing the script.
-2. Run the script using the following command:
+To use this tool, you'll need Python installed on your system. Download the script from the URL and run it from the command line, providing the path to your project directory and the desired output file path for the documentation.
+
+### Downloading the Script
 
 ```bash
-python maestro.py
+curl -o project_doc_tool.py <URL_TO_DOWNLOAD_SCRIPT>
 ```
 
-3. Enter your objective when prompted:
+Replace `<URL_TO_DOWNLOAD_SCRIPT>` with the actual URL where the script is hosted.
+
+### Running the Tool
 
 ```bash
-Please enter your objective: Your objective here
+python project_doc_tool.py <path_to_project_directory> <path_to_output_file>
 ```
 
-The script will start the task breakdown and execution process. It will display the progress and results in the console using formatted panels.
+Replace `<path_to_project_directory>` with the path to your project directory and `<path_to_output_file>` with the path where you want the output documentation file to be saved.
 
-Once the process is complete, the script will display the refined final output and save the full exchange log to a Markdown file with a filename based on the objective.
+## Example
 
-## Code Structure
+```bash
+python project_doc_tool.py my_project/ project_overview.md
+```
 
-The script consists of the following main functions:
-
-- `opus_orchestrator(objective, previous_results=None)`: Calls the Opus model to break down the objective into sub-tasks or provide the final output. It uses an improved prompt to assess task completion and includes the phrase "The task is complete:" when the objective is fully achieved.
-- `haiku_sub_agent(prompt, previous_haiku_tasks=None)`: Calls the Haiku model to execute a sub-task prompt, providing it with the memory of previous sub-tasks.
-- `opus_refine(objective, sub_task_results)`: Calls the Opus model to review and refine the sub-task results into a cohesive final output.
-
-The script follows an iterative process, repeatedly calling the opus_orchestrator function to break down the objective into sub-tasks until the final output is provided. Each sub-task is then executed by the haiku_sub_agent function, and the results are stored in the task_exchanges and haiku_tasks lists.
-
-The loop terminates when the Opus model includes the phrase "The task is complete:" in its response, indicating that the objective has been fully achieved.
-
-Finally, the opus_refine function is called to review and refine the sub-task results into a final output. The entire exchange log, including the objective, task breakdown, and refined final output, is saved to a Markdown file.
-
-## Customization
-
-You can customize the script according to your needs:
-
-- Adjust the max_tokens parameter in the client.messages.create() function calls to control the maximum number of tokens generated by the AI models.
-- Modify the console output formatting by updating the rich library's Panel and Console configurations.
-- Customize the exchange log formatting and file extension by modifying the relevant code sections.
+This command will generate a file named `project_overview.md` in the current directory, containing the structure and contents of the `my_project` directory.
 
 ## License
 
-This script is released under the MIT License.
+MIT License
 
-## Acknowledgements
+Copyright (c) 20024 Marcelo Sales
 
-- Anthropic for providing the AI models and API.
-- Rich for the beautiful console formatting.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## Contributions
+
+Contributions are welcome! Please feel free to submit a pull request.
